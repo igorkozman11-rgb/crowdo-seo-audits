@@ -1,0 +1,1016 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO Audit — travelbusinessclass.com</title>
+<style>
+:root{
+  --bg:oklch(99% .001 240);
+  --surface:oklch(100% 0 0);
+  --surface-2:oklch(97.5% .002 240);
+  --surface-3:oklch(95% .003 240);
+  --fg:oklch(15% .008 260);
+  --fg-2:oklch(25% .01 260);
+  --body:oklch(45% .012 260);
+  --muted:oklch(55% .012 260);
+  --muted-2:oklch(68% .008 260);
+  --border:oklch(92% .003 260);
+  --border-strong:oklch(85% .005 260);
+
+  --blue:#4285F4;
+  --blue-fg:#1559C4;
+  --blue-bg:oklch(62% .19 260 / .06);
+  --blue-border:oklch(62% .19 260 / .18);
+  --orange:#F6961B;
+  --orange-fg:#F5961C;
+  --orange-bg:oklch(72% .17 65 / .14);
+  --orange-border:oklch(72% .17 65 / .4);
+  --red:#EA4335;
+  --red-fg:#C5221F;
+  --red-bg:oklch(60% .22 25 / .06);
+  --red-border:oklch(60% .22 25 / .18);
+  --green:#34A853;
+  --green-fg:#137333;
+  --green-bg:oklch(62% .15 145 / .06);
+  --green-border:oklch(62% .15 145 / .18);
+
+  --sidebar-w:248px;
+  --r-xs:4px;--r-sm:8px;--r:12px;--r-lg:16px;
+  --font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif;
+  --font-d:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;
+  --font-m:ui-monospace,'SF Mono','JetBrains Mono',Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.6;font-size:15px;letter-spacing:-.005em}
+::selection{background:var(--blue);color:#fff}
+a{color:var(--blue-fg);text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none}
+code{font-family:var(--font-m);font-size:.85em;background:var(--surface-2);padding:2px 6px;border-radius:var(--r-xs);color:var(--blue-fg);border:1px solid var(--border);overflow-wrap:anywhere}
+
+.app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh}
+
+/* ============ Sidebar ============ */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);display:flex;flex-direction:column;z-index:50;overflow-y:auto}
+.brand{padding:20px 20px 16px;border-bottom:1px solid var(--border)}
+.brand-label{font:700 10px/1 var(--font-m);letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.brand-name{font:600 15px/1.2 var(--font-d);color:var(--fg);letter-spacing:-.02em}
+.brand-domain{font:500 12px/1 var(--font);color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:5px}
+.brand-domain::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+.nav{padding:12px 10px;flex:1}
+.nav-label{font:600 10px/1 var(--font-m);letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);padding:8px 10px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r-sm);font:500 13px/1.3 var(--font);color:var(--muted);transition:all .12s;width:100%;text-align:left;margin-bottom:1px}
+.nav-item:hover{background:var(--surface-2);color:var(--fg-2)}
+.nav-item.active{background:var(--blue-bg);color:var(--blue-fg);font-weight:600}
+.nav-item.active svg{color:var(--blue-fg)}
+.nav-item svg{width:16px;height:16px;color:var(--muted-2);flex-shrink:0}
+.nav-item .impact{margin-left:auto;font:700 9px/1 var(--font-m);padding:2px 5px;border-radius:3px;white-space:nowrap;letter-spacing:.02em}
+.nav-item .impact.crit{background:var(--red-bg);color:var(--red-fg)}
+.nav-item .impact.med{background:var(--orange-bg);color:var(--orange-fg)}
+
+.sidebar-footer{padding:12px 20px;border-top:1px solid var(--border)}
+.sf-row{display:flex;justify-content:space-between;font:500 11px/1.5 var(--font-m);color:var(--muted-2)}
+.sf-row span{color:var(--fg-2);font-weight:600}
+
+/* ============ Main ============ */
+.main{grid-column:2;min-height:100vh;min-width:0}
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.page-inner{max-width:840px;margin:0 auto;padding:36px 40px 80px}
+
+/* ============ Page header ============ */
+.page-header{margin-bottom:32px}
+.eyebrow{font:600 11px/1 var(--font-m);letter-spacing:.08em;text-transform:uppercase;color:var(--blue-fg);margin-bottom:10px}
+.page-header h1{font:600 30px/1.2 var(--font-d);letter-spacing:-.03em;color:var(--fg);margin-bottom:8px}
+.page-header p{font:400 15px/1.6 var(--font);color:var(--body);max-width:680px}
+.page-header p strong{color:var(--fg)}
+
+/* ============ Cover ============ */
+.cover{padding:48px 0 40px;margin-bottom:32px;border-bottom:1px solid var(--border)}
+.cover-label{font:700 11px/1 var(--font-m);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-fg);margin-bottom:16px}
+.cover-title{font:600 42px/1.1 var(--font-d);letter-spacing:-.035em;color:var(--fg);margin-bottom:20px}
+.cover-title span{color:var(--blue-fg)}
+.cover-desc{font:400 16px/1.65 var(--font);color:var(--body);max-width:620px;margin-bottom:24px}
+.cover-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.meta-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font:500 12px/1.3 var(--font);color:var(--body)}
+.meta-chip.alert{background:var(--orange-bg);border-color:var(--orange-border);color:var(--orange-fg)}
+.cover-brand{display:flex;align-items:center;gap:14px;font:600 13px/1 var(--font);color:var(--muted)}
+.cover-brand strong{color:var(--fg-2)}
+.cover-sep{width:1px;height:16px;background:var(--border-strong)}
+
+/* ============ Section ============ */
+.section{margin-bottom:32px}
+.section-head{margin-bottom:20px}
+.section-head h2{font:600 22px/1.25 var(--font-d);letter-spacing:-.025em;color:var(--fg);margin-bottom:6px}
+.section-head p{font:400 15px/1.6 var(--font);color:var(--body);max-width:680px}
+.section-head p strong{color:var(--fg)}
+
+/* ============ Metric ============ */
+.metric{padding:24px 20px 20px;border-bottom:1px solid var(--border);position:relative}
+.metric .val{font:600 36px/1 var(--font-d);letter-spacing:-.03em;color:var(--fg);margin-bottom:8px;font-variant-numeric:tabular-nums}
+.metric .val.red{color:var(--red)}
+.metric .val.blue{color:var(--blue-fg)}
+.metric .val.green{color:var(--green-fg)}
+.metric .val.orange{color:var(--orange-fg)}
+.metric .lbl{font:500 13px/1.3 var(--font);color:var(--muted)}
+.metric .dot{position:absolute;top:24px;right:20px;width:8px;height:8px;border-radius:50%}
+.metric .dot.red{background:var(--red)}
+.metric .dot.blue{background:var(--blue)}
+.metric .dot.green{background:var(--green)}
+.metric .dot.orange{background:var(--orange)}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface);margin-bottom:24px}
+@media(max-width:700px){.metrics-row{grid-template-columns:repeat(2,1fr)}.metric:nth-child(odd){border-right:1px solid var(--border)}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+.metrics-row .metric{border-right:1px solid var(--border);border-bottom:0}
+.metrics-row .metric:last-child{border-right:0}
+
+/* ============ Card ============ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.card-body{padding:28px 32px}
+.card-label{font:600 11px/1 var(--font-m);letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px}
+
+/* ============ Callout ============ */
+.callout{padding:12px 16px;border-radius:var(--r-sm);font:400 14px/1.55 var(--font);color:var(--body);margin-bottom:16px;border:1px solid;display:flex;gap:10px;align-items:flex-start}
+.callout strong{color:var(--fg);font-weight:600}
+.callout .ico{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:1.5px solid currentColor;margin-top:2px;font-size:0;line-height:1}
+.callout .ico::after{content:'';display:block;width:6px;height:6px;border-radius:50%;background:currentColor;margin:4.5px auto 0}
+.callout.blue{background:var(--blue-bg);border-color:var(--blue-border);color:var(--fg-2)}
+.callout.blue strong{color:var(--blue-fg)}
+.callout.orange{background:var(--orange-bg);border-color:var(--orange-border);color:var(--fg-2)}
+.callout.orange strong{color:var(--orange-fg)}
+.callout.red{background:var(--red-bg);border-color:var(--red-border);color:var(--fg-2)}
+.callout.red strong{color:var(--red-fg)}
+.callout.green{background:var(--green-bg);border-color:var(--green-border);color:var(--fg-2)}
+.callout.green strong{color:var(--green-fg)}
+
+/* ============ Checklist ============ */
+.checklist{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.checklist li{display:flex;gap:10px;font:400 14.5px/1.55 var(--font);color:var(--body)}
+.checklist li span:first-child{flex-shrink:0}
+.check-dot{width:18px;height:18px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue-border);position:relative;margin-top:2px}
+.check-dot::after{content:'';position:absolute;left:5px;top:3px;width:5px;height:9px;border:solid var(--blue-fg);border-width:0 1.8px 1.8px 0;transform:rotate(45deg)}
+
+/* ============ Issue list ============ */
+.issue{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.issue:last-child{border-bottom:0}
+.issue-dot{flex-shrink:0;width:8px;height:8px;border-radius:50%;margin-top:7px}
+.issue-dot.red{background:var(--red)}
+.issue-dot.orange{background:var(--orange)}
+.issue-dot.blue{background:var(--blue)}
+.issue-body{flex:1;min-width:0}
+.issue-title{font:600 15px/1.3 var(--font);color:var(--fg);margin-bottom:4px}
+.issue-desc{font:400 13.5px/1.55 var(--font);color:var(--body)}
+.issue-desc code{font-size:.85em}
+.issue-desc em{font-style:normal;color:var(--fg-2);font-weight:500}
+.issue-badge{flex-shrink:0;font:600 10px/1 var(--font-m);padding:4px 8px;border-radius:var(--r-xs);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.issue-badge.red{background:var(--red-bg);color:var(--red-fg)}
+.issue-badge.orange{background:var(--orange-bg);color:var(--orange-fg)}
+.issue-badge.blue{background:var(--blue-bg);color:var(--blue-fg)}
+
+/* ============ Timeline ============ */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;padding:8px 0}
+.timeline::before{content:'';position:absolute;top:28px;left:12.5%;right:12.5%;height:1px;background:var(--border-strong);z-index:0}
+.tl-step{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1;padding:0 12px}
+.tl-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 15px/1 var(--font-d);border:2px solid var(--blue);background:var(--surface);color:var(--blue-fg)}
+.tl-num.urgent{border-color:var(--red);color:var(--red-fg);background:oklch(95% .035 25)}
+.tl-label{font:600 14px/1.3 var(--font);color:var(--fg);text-align:center;letter-spacing:-.01em}
+.tl-label.urgent{color:var(--red-fg)}
+.tl-sub{font:400 12px/1.45 var(--font);color:var(--muted);text-align:center;max-width:140px}
+@media(max-width:700px){.timeline{grid-template-columns:1fr;gap:20px}.timeline::before{display:none}}
+
+/* ============ Action grid ============ */
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.action-grid{grid-template-columns:1fr}}
+.action-col{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r);padding:20px 18px}
+.action-col h4{font:700 10px/1 var(--font-m);text-transform:uppercase;letter-spacing:.08em;padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:14px}
+.action-col.col-r h4{color:var(--red-fg)}
+.action-col.col-o h4{color:var(--orange-fg)}
+.action-col.col-g h4{color:var(--green-fg)}
+.action-items{display:flex;flex-direction:column;gap:12px}
+.action-item{display:flex;gap:10px;font:400 13px/1.5 var(--font);color:var(--body)}
+.action-item code{font-size:.85em}
+.action-num{flex-shrink:0;width:20px;height:20px;border-radius:50%;color:#fff;font:700 10px/1 var(--font);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.col-r .action-num{background:var(--red)}
+.col-o .action-num{background:var(--orange)}
+.col-g .action-num{background:var(--green)}
+
+/* ============ Two-col ============ */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;gap:24px}}
+
+/* ============ Evidence grid ============ */
+.evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+@media(max-width:700px){.evidence-grid{grid-template-columns:1fr}}
+.evidence-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px}
+.evidence-label{font:700 10px/1 var(--font-m);letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin-bottom:10px}
+.evidence-body{font:400 14px/1.55 var(--font);color:var(--body)}
+.evidence-body strong{color:var(--fg);font-weight:600}
+
+/* ============ Table ============ */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{font:600 11px/1.3 var(--font-m);letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);text-align:left;padding:14px 16px;border-bottom:1px solid var(--border-strong);white-space:nowrap;background:var(--surface-2)}
+tbody td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--body);font-variant-numeric:tabular-nums}
+tbody td.num{font-family:var(--font-m);font-size:13px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.hl td{background:var(--blue-bg)}
+tbody tr.hl td:first-child{color:var(--blue-fg);font-weight:600}
+tbody tr:not(.hl):hover td{background:var(--surface-2)}
+td .role{color:var(--muted);font-size:13px}
+
+/* ============ Reputation ============ */
+.rep{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.rep:last-child{border-bottom:0;padding-bottom:0}
+.rep:first-child{padding-top:0}
+.rep-icon{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px}
+.rep-icon.ok{background:var(--green-bg);color:var(--green-fg)}
+.rep-icon.ok::after{content:'';width:7px;height:13px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.rep-icon.warn{background:var(--orange-bg);color:var(--orange-fg);font:800 17px/1 var(--font-d)}
+.rep-icon.risk{background:var(--red-bg);color:var(--red-fg);font:800 17px/1 var(--font-d)}
+.rep h4{font:600 15px/1.3 var(--font);color:var(--fg);margin-bottom:6px;letter-spacing:-.01em}
+.rep p{font:400 13.5px/1.6 var(--font);color:var(--body)}
+.rep p strong{color:var(--fg)}
+.rep p a{text-decoration:underline}
+
+/* ============ Forecast model ============ */
+.forecast-model{display:grid;gap:16px}
+.forecast-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.forecast-kicker{font:700 10px/1 var(--font-m);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-fg);margin-bottom:7px}
+.forecast-title{font:650 20px/1.18 var(--font-d);letter-spacing:-.03em;color:var(--fg)}
+.forecast-sub{font:400 13px/1.45 var(--font);color:var(--muted);max-width:520px;margin-top:7px}
+.forecast-badge{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--orange-border);background:var(--orange-bg);color:var(--orange-fg);border-radius:999px;padding:8px 11px;font:700 10px/1 var(--font-m);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.forecast-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.forecast-chart{position:relative;background:linear-gradient(180deg,#fff 0%,oklch(98% .003 260) 100%);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 22px 14px;box-shadow:0 18px 48px oklch(20% .02 260 / .08)}
+.forecast-chart svg{width:100%;height:auto;display:block}
+.forecast-footnote{display:flex;justify-content:space-between;gap:18px;align-items:center;font:500 11.5px/1.45 var(--font);color:var(--muted)}
+.forecast-footnote .legend-item{display:inline-flex;align-items:center;gap:9px}
+.forecast-footnote .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.forecast-footnote .legend-dot.blue{background:var(--blue)}
+.forecast-footnote .legend-dot.orange{background:var(--orange)}
+.forecast-footnote strong{color:var(--orange-fg);font-weight:700}
+@media(max-width:760px){
+  .forecast-top,.forecast-footnote{flex-direction:column;align-items:flex-start}
+}
+
+/* ============ Contact ============ */
+.contact-panel{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:0 18px 50px oklch(15% .008 260 / .07)}
+.contact-panel::before{content:'';position:absolute;inset:0 0 auto 0;height:5px;background:linear-gradient(90deg,var(--blue),var(--orange));}
+.contact-main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:38px;align-items:stretch;padding:38px}
+@media(max-width:760px){.contact-main{grid-template-columns:1fr;padding:28px;gap:24px}}
+.contact-kicker{font:700 11px/1 var(--font-m);letter-spacing:.1em;text-transform:uppercase;color:var(--orange-fg);margin-bottom:14px}
+.contact-title{font:650 36px/1.08 var(--font-d);letter-spacing:-.04em;color:var(--fg);max-width:560px;margin-bottom:14px}
+.contact-copy{font:400 15.5px/1.65 var(--font);color:var(--body);max-width:560px;margin-bottom:26px}
+.contact-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:26px}
+.contact-primary{display:inline-flex;align-items:center;gap:9px;background:var(--blue);color:#fff;border-radius:var(--r-sm);padding:14px 22px;font:650 14px/1 var(--font);letter-spacing:-.01em;text-decoration:none;box-shadow:0 12px 26px oklch(62% .19 260 / .22);transition:transform .14s,box-shadow .14s,background .14s}
+.contact-primary:hover{background:var(--blue-fg);transform:translateY(-1px);box-shadow:0 16px 32px oklch(62% .19 260 / .28)}
+.contact-secondary{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);border-radius:var(--r-sm);padding:13px 18px;color:var(--fg-2);font:600 14px/1 var(--font);text-decoration:none;background:var(--surface)}
+.contact-secondary svg,.contact-primary svg{width:16px;height:16px;flex-shrink:0}
+.contact-note{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:610px}
+@media(max-width:640px){.contact-note{grid-template-columns:1fr}}
+.contact-note-item{border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface-2);padding:13px 14px}
+.contact-note-label{font:700 10px/1 var(--font-m);letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:7px}
+.contact-note-value{font:600 13px/1.35 var(--font);color:var(--fg)}
+.contact-card{background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.contact-person{display:grid;gap:16px;justify-items:center;text-align:center}
+.contact-avatar{width:220px;height:220px;border-radius:50%;object-fit:cover;object-position:top center;flex-shrink:0;border:1px solid var(--border);box-shadow:0 16px 34px oklch(15% .008 260 / .12);background:#fff}
+.contact-name{font:650 22px/1.12 var(--font-d);color:var(--fg);letter-spacing:-.03em;margin-bottom:6px}
+.contact-role{font:500 12px/1.35 var(--font);color:var(--muted)}
+.contact-qr-wrap{display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:center}
+.contact-qr{width:80px;height:80px;border-radius:var(--r-sm);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;padding:6px}
+.contact-qr img{width:100%;height:100%;object-fit:contain}
+.contact-qr-copy strong{display:block;font:650 13px/1.25 var(--font);color:var(--fg);margin-bottom:6px}
+.contact-qr-copy span{display:block;font:400 12px/1.45 var(--font);color:var(--muted)}
+.contact-footer{display:flex;justify-content:space-between;align-items:center;padding:17px 36px;border-top:1px solid var(--border);background:var(--surface-2);gap:16px}
+@media(max-width:640px){.contact-footer{padding:16px 28px;align-items:flex-start;flex-direction:column}}
+.contact-footer p{font:600 11px/1 var(--font-m);letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2)}
+.contact-footer span{font:800 13px/1 var(--font);letter-spacing:.08em;color:var(--fg-2)}
+
+/* ============ Core Next Step ============ */
+.core-recommend{background:var(--orange-bg);border:1px solid var(--orange-border);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:28px}
+.core-recommend-label{font:700 11px/1 var(--font-m);letter-spacing:.08em;text-transform:uppercase;color:var(--orange-fg);margin-bottom:10px}
+.core-recommend-title{font:650 19px/1.35 var(--font-d);letter-spacing:-.02em;color:var(--fg);margin-bottom:10px}
+.core-recommend-copy{font:400 14.5px/1.6 var(--font);color:var(--body)}
+.core-recommend-copy strong{color:var(--fg);font-weight:600}
+
+.core-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+@media(max-width:760px){.core-grid{grid-template-columns:1fr}}
+.core-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 20px 18px}
+.core-card h4{font:600 15px/1.3 var(--font);color:var(--fg);margin:12px 0 6px;letter-spacing:-.01em}
+.core-card p{font:400 13.5px/1.55 var(--font);color:var(--body)}
+.core-card-icon{width:26px;height:26px;border-radius:50%;background:var(--orange-bg);border:1px solid var(--orange-border);position:relative}
+.core-card-icon::after{content:'';position:absolute;left:8px;top:5px;width:6px;height:11px;border:solid var(--orange-fg);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.core-card-addon{border-color:var(--orange-border);background:var(--orange-bg)}
+.core-card-addon .core-card-icon{background:var(--orange);border-color:var(--orange)}
+.core-card-addon .core-card-icon::after{border-color:#fff}
+.core-card-tag{font:700 10px/1 var(--font-m);letter-spacing:.06em;text-transform:uppercase;color:var(--orange-fg);margin-bottom:8px}
+
+.core-cta-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.core-cta-bar p{font:400 14.5px/1.6 var(--font);color:var(--body);max-width:560px}
+.core-cta-bar p strong{color:var(--fg);font-weight:600}
+.core-cta-btn{background:var(--orange);box-shadow:0 12px 26px oklch(72% .17 65 / .28);white-space:nowrap}
+.core-cta-btn:hover{background:var(--orange-fg)}
+@media(max-width:700px){.core-cta-bar{flex-direction:column;align-items:flex-start}}
+
+/* ============ Responsive ============ */
+@media(max-width:960px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:sticky;top:0;width:100%;height:auto;border-right:0;border-bottom:1px solid var(--border);flex-direction:row;align-items:center;padding:0 10px;overflow-x:auto;overflow-y:hidden}
+  .brand{padding:10px 14px;border:0;border-right:1px solid var(--border);flex-shrink:0}
+  .nav{display:flex;padding:6px;flex:1;gap:2px}
+  .nav-label,.impact{display:none}
+  .nav-item{white-space:nowrap;margin-bottom:0;padding:7px 10px}
+  .sidebar-footer{display:none}
+  .main{grid-column:1}
+  .page-inner{padding:24px 20px 60px}
+  .cover-title{font-size:30px}
+}
+
+@media print{
+  @page{size:A4;margin:12mm 10mm}
+  .app{display:block}
+  .sidebar{display:none}
+  .main{grid-column:1}
+  .page{display:block !important;page-break-after:always;animation:none !important;opacity:1 !important;transform:none !important}
+  .page-inner{padding:12px 0 24px;max-width:none}
+  .callout,.metrics-row,.evidence-card,.action-col,.table-wrap,.rep,.issue,.core-card,.forecast-chart,.contact-card{break-inside:avoid}
+  .page-header,.section-head{break-after:avoid}
+  .table-wrap{overflow:visible}
+  table{font-size:12px;table-layout:auto}
+  thead th{white-space:normal;padding:9px 10px}
+  tbody td{padding:9px 10px;white-space:normal;overflow-wrap:anywhere}
+  tbody td.num{font-size:11px}
+  .contact-panel{break-inside:avoid}
+  .contact-avatar{width:150px;height:150px}
+  .contact-main{padding:28px;gap:24px}
+  .forecast-chart{box-shadow:none}
+  .page:last-child{page-break-after:auto}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-name">TravelBusinessClass</div>
+    <div class="brand-domain">travelbusinessclass.com</div>
+  </div>
+  <nav class="nav">
+    <div class="nav-label">Sections</div>
+    <button class="nav-item active" data-route="summary">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="7" height="7" rx="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5"/></svg>
+      Performance Summary
+    </button>
+    <button class="nav-item" data-route="roadmap">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="10" cy="14" r="2"/><path d="M6.5 7L9 12.5M13.5 7L11 12.5"/></svg>
+      Roadmap
+    </button>
+    <button class="nav-item" data-route="csr">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 12l2-5 2 3 2-6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="7"/></svg>
+      Indexation Signals
+      <span class="impact crit">Critical</span>
+    </button>
+    <button class="nav-item" data-route="technical">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 2v0a4 4 0 014 4v3l1.5 2.5h-11L6 9V6a4 4 0 014-4z"/><path d="M8 15a2 2 0 004 0"/></svg>
+      Technical
+      <span class="impact med">Medium</span>
+    </button>
+    <button class="nav-item" data-route="onpage">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 8h6M7 11h4" stroke-linecap="round"/></svg>
+      On-Page SEO
+      <span class="impact med">Medium</span>
+    </button>
+    <button class="nav-item" data-route="competitors">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="6" r="3"/><path d="M3.5 17.5a6.5 6.5 0 0113 0" stroke-linecap="round"/><circle cx="15.5" cy="5.5" r="1.5"/><circle cx="4.5" cy="5.5" r="1.5"/></svg>
+      Competitors
+    </button>
+    <button class="nav-item" data-route="forecast">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 15l4-4 3 3 5-6 2 2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 6h3v3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Growth Forecast
+    </button>
+    <button class="nav-item" data-route="reputation">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 1l2.5 6L19 7l-5 4 1.5 6.5L10 14l-5.5 3.5L6 11 1 7l6.5 0z" stroke-linejoin="round"/></svg>
+      Brand Reputation
+    </button>
+    <button class="nav-item" data-route="core">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 16.5V3.5M10 3.5l-4.5 4.5M10 3.5l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Crowdo Core
+    </button>
+    <button class="nav-item" data-route="contact">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a1 1 0 011-1h12a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5z"/><path d="M3 6l7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Contact
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sf-row"><span>CROWDO</span> SEO Audit</div>
+    <div class="sf-row">October 28, 2026</div>
+    <div class="sf-row">429 URLs · 3 comp.</div>
+  </div>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+
+<!-- ===== PAGE: SUMMARY ===== -->
+<div class="page active" id="page-summary">
+<div class="page-inner">
+  <div class="cover">
+    <div class="cover-label">SEO Audit · October 28, 2026</div>
+    <h1 class="cover-title">SEO Audit for<br><span>travelbusinessclass.com</span></h1>
+    <p class="cover-desc">TravelBusinessClass is an established US business-class fare consolidator (Travel Management Group LLC, Sunny Isles Beach, FL; domain registered June 2019) with a 429-URL Nuxt site, a 4.9 Trustpilot score from 5,230 reviews, and an estimated 183K visits per month. The traffic is real, but it is bought: Paid Search is the #1 channel and organic search does not make the top three. The reason is largely self-inflicted — the production site config still points at a <code>v2.</code> staging host, so <code>robots.txt</code> and every one of the 429 sitemap URLs send Google to the wrong domain, while 159 "first class" pages duplicate the "business class" pages almost sentence for sentence. This audit separates the solid commercial base from the technical and content debt that is holding organic back.</p>
+    <div class="cover-meta">
+      <span class="meta-chip">🔍 429 sitemap URLs crawled (428 live, 1 × 404)</span>
+      <span class="meta-chip alert">🔴 100% of sitemap URLs point at v2.travelbusinessclass.com</span>
+      <span class="meta-chip">🏆 3 competitors analyzed</span>
+    </div>
+    <div class="cover-brand">
+      <strong>CROWDO</strong>
+      <div class="cover-sep"></div>
+      <span>travelbusinessclass.com</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <div class="eyebrow">Current State</div>
+      <h2>Summary of your website performance</h2>
+      <p>A 7-year-old domain (registered June 16, 2019, GoDaddy; hosted on DigitalOcean) running a server-rendered Nuxt frontend with 34 top-level landing pages, 22 airline pages, 163 "best deals" destination pages, 159 "first class" destination pages, 67 blog posts and 3 legal pages. Security headers are strong (HSTS, CSP, COOP/CORP, Permissions-Policy), HTTP and <code>www</code> both 308-redirect cleanly to the apex, and an owner-authored <code>llms.txt</code> is in place. Similarweb estimates 183.4K visits in September 2026 (+29.6% month-on-month, global rank #176,002, #207 in US Air Travel), but with <strong>Paid Search as the top channel (36% of desktop visits)</strong>, Display second and Direct third — organic search is not among the top three. Meanwhile the one file that tells Google what to index, <code>sitemap.xml</code>, lists 429 URLs on <code>v2.travelbusinessclass.com</code>, a host that serves an untrusted TLS certificate.</p>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric"><div class="dot blue"></div><div class="val blue">183K</div><div class="lbl">Est. visits / mo (Similarweb, Sep 2026)</div></div>
+      <div class="metric"><div class="dot orange"></div><div class="val orange">36%</div><div class="lbl">Paid Search share — #1 channel; organic not in top 3</div></div>
+      <div class="metric"><div class="dot red"></div><div class="val red">429</div><div class="lbl">Sitemap URLs pointing at the wrong host (100%)</div></div>
+      <div class="metric"><div class="dot red"></div><div class="val red">159</div><div class="lbl">Near-duplicate "first class" pages (37% of site)</div></div>
+    </div>
+
+    <div class="callout blue">
+      <span class="ico" aria-hidden="true"></span>
+      <div><strong>Methodology:</strong> Technical and on-page findings come from a full HTTP crawl of all 429 URLs in <code>sitemap.xml</code> on October 28, 2026, fetched on the production host (<code>travelbusinessclass.com</code>) with the raw HTML parsed for titles, descriptions, canonicals, headings, structured data, image alt text and page weight, plus header, redirect, <code>robots.txt</code>, DNS and TLS checks. Traffic, rank and channel figures are Similarweb public estimates (September 2026) — directional, not analytics. Reputation findings come from the live Trustpilot, BBB, Tripadvisor and Bogleheads pages. Domain data is from Verisign RDAP. <strong>Ahrefs and Google Search Console are not connected for travelbusinessclass.com</strong> — no Domain Rating, backlink, ranked-keyword, click, impression or coverage figures appear anywhere in this report, and indexation status is inferred from the sitemap/robots configuration, not verified per URL. PageSpeed Insights quota was exhausted at crawl time, so page-weight figures are measured HTML/CSS/JS byte sizes, not Lighthouse scores.</div>
+    </div>
+
+    <p style="font:500 14px/1.5 var(--font);color:var(--fg);margin-bottom:14px;letter-spacing:-.01em">This audit focuses on three things:</p>
+    <ul class="checklist">
+      <li><span class="check-dot" aria-hidden="true"></span><span>Fix the one-line configuration error that points <code>robots.txt</code> and all 429 sitemap entries at <code>v2.travelbusinessclass.com</code> — the single highest-leverage change available, and the reason organic discovery is running on Google's goodwill rather than on the site's own signals</span></li>
+      <li><span class="check-dot" aria-hidden="true"></span><span>Collapse the duplication: 159 "first class" destination pages that mirror the "business class" pages, 84 pages with no canonical tag at all, 26 pages sharing a single title, and two copies of the Terms &amp; Conditions</span></li>
+      <li><span class="check-dot" aria-hidden="true"></span><span>Reduce dependence on paid acquisition by making the 67-post blog and 22 airline pages carry their weight — right now they are published without canonicals, structured data or current-year metadata, and four of them weigh 2–10 MB each</span></li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: ROADMAP ===== -->
+<div class="page" id="page-roadmap">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Strategy Overview</div>
+    <h1>Here's our step-by-step roadmap</h1>
+    <p>Four phases in priority order. Phase 1 is a configuration fix that takes an afternoon; everything after it is content and template work that compounds over the following quarter.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-body">
+      <div class="timeline">
+        <div class="tl-step">
+          <div class="tl-num urgent">1</div>
+          <div class="tl-label urgent">Indexation Signals</div>
+          <div class="tl-sub">Point robots.txt + sitemap at the production host; connect GSC</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-num">2</div>
+          <div class="tl-label">De-duplication</div>
+          <div class="tl-sub">Canonicals, first-class vs best-deals, shared titles</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-num">3</div>
+          <div class="tl-label">Template &amp; Weight</div>
+          <div class="tl-sub">Titles, H1s, schema, 10 MB blog posts, inline CSS</div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-num">4</div>
+          <div class="tl-label">Organic Growth</div>
+          <div class="tl-sub">Blog as acquisition channel, review-site parity, editorial links</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="action-grid">
+        <div class="action-col col-r">
+          <h4>Phase 1 — Now</h4>
+          <div class="action-items">
+            <div class="action-item"><span class="action-num">1</span><span>Set the Nuxt site URL (the <code>site-config</code> <code>url</code> value, currently <code>https://v2.travelbusinessclass.com/</code>) to <code>https://travelbusinessclass.com</code> in production — this alone rewrites <code>robots.txt</code> and all 429 sitemap entries</span></div>
+            <div class="action-item"><span class="action-num">2</span><span>Decide what <code>v2.travelbusinessclass.com</code> is for: either 301 it to the apex or block it (<code>noindex</code> + robots disallow) and fix its certificate — right now it resolves (157.230.201.57) but fails TLS validation</span></div>
+            <div class="action-item"><span class="action-num">3</span><span>Verify <code>travelbusinessclass.com</code> in Google Search Console, submit the corrected sitemap, and remove <code>/special-offers</code> (404) from it</span></div>
+          </div>
+        </div>
+        <div class="action-col col-o">
+          <h4>Phase 2 — Weeks 1–2</h4>
+          <div class="action-items">
+            <div class="action-item"><span class="action-num">1</span><span>Add self-referencing canonicals to the 84 pages that have none — homepage, all 67 blog posts, <code>/about</code>, <code>/contact-us</code>, <code>/blog</code>, legal pages and 7 deal landing pages</span></div>
+            <div class="action-item"><span class="action-num">2</span><span>Resolve the 159 <code>/first-class/*</code> pages: either rewrite them with genuinely first-class content and pricing, or canonicalize them to the matching <code>/best-deals/*</code> page</span></div>
+            <div class="action-item"><span class="action-num">3</span><span>Give the 26 pages currently titled "Cheap Business Class Tickets | Travel Business Class | Business Class" unique titles; canonicalize <code>/page/terms_and_conditions_2025</code> and <code>/corp-clients</code> (shares the homepage title)</span></div>
+          </div>
+        </div>
+        <div class="action-col col-g">
+          <h4>Phase 3–4 — Week 3+</h4>
+          <div class="action-items">
+            <div class="action-item"><span class="action-num">1</span><span>Move base64-inlined images in the 4 blog posts weighing 2–10 MB to the CDN; cut the ~331 KB of inline CSS shipped on every page; serve WebP/AVIF (0 of 5,700 images today)</span></div>
+            <div class="action-item"><span class="action-num">2</span><span>Shorten the 319 titles over 60 characters, remove stale "2022/2023" from 41 meta descriptions, add an H1 to the homepage, add <code>TravelAgency</code>/<code>Organization</code>, <code>BreadcrumbList</code> and <code>Article</code> JSON-LD (only 1 of 428 pages has any)</span></div>
+            <div class="action-item"><span class="action-num">3</span><span>Turn the blog into an acquisition asset (currently 67 posts, no canonicals, no schema) and earn editorial mentions in travel press — the USA Today feature already referenced on the blog shows the brand qualifies</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: INDEXATION SIGNALS ===== -->
+<div class="page" id="page-csr">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Priority Issue #1 · Indexation Signals</div>
+    <h1>robots.txt and all 429 sitemap URLs point at a staging host</h1>
+    <p>The production homepage's server-rendered Nuxt payload sets the site URL to <code>https://v2.travelbusinessclass.com/</code> (environment: <code>production</code>, app: <code>tbc-client-site-frontend</code>). <code>@nuxtjs/robots</code> and the sitemap module both read that value, so <code>robots.txt</code> declares <code>Sitemap: https://v2.travelbusinessclass.com/sitemap.xml</code> and <strong>every <code>&lt;loc&gt;</code> in the sitemap — 429 of 429 — uses the <code>v2.</code> hostname.</strong> That host resolves to a DigitalOcean IP but fails TLS validation (<code>SEC_E_UNTRUSTED_ROOT</code>), so a crawler following the sitemap hits a certificate error before it sees a single page.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="card-label">What the live files say — fetched October 28, 2026</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Observed</th><th>Expected</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><code>robots.txt</code> → Sitemap directive</td><td class="num">https://v2.travelbusinessclass.com/sitemap.xml</td><td class="num">https://travelbusinessclass.com/sitemap.xml</td><td class="num" style="color:var(--red-fg);font-weight:700">Wrong host</td></tr>
+            <tr><td><code>sitemap.xml</code> → <code>&lt;loc&gt;</code> hostnames</td><td class="num">v2.travelbusinessclass.com × 429</td><td class="num">travelbusinessclass.com × 429</td><td class="num" style="color:var(--red-fg);font-weight:700">Wrong host</td></tr>
+            <tr><td>Nuxt <code>site-config.url</code> (SSR payload)</td><td class="num">https://v2.travelbusinessclass.com/</td><td class="num">https://travelbusinessclass.com</td><td class="num" style="color:var(--red-fg);font-weight:700">Root cause</td></tr>
+            <tr><td>TLS on <code>v2.travelbusinessclass.com</code></td><td class="num">Untrusted root (handshake fails)</td><td class="num">Valid cert, or host not public</td><td class="num" style="color:var(--red-fg);font-weight:700">Broken</td></tr>
+            <tr><td>Sitemap entries returning 404</td><td class="num">1 — /special-offers</td><td class="num">0</td><td class="num" style="color:var(--orange-fg);font-weight:700">Stale</td></tr>
+            <tr><td><code>og:url</code>, canonicals (where present)</td><td class="num">travelbusinessclass.com</td><td class="num">travelbusinessclass.com</td><td class="num" style="color:var(--green-fg);font-weight:700">Correct</td></tr>
+            <tr><td>http:// and www. → apex</td><td class="num">308 → https://travelbusinessclass.com</td><td class="num">301/308 to apex</td><td class="num" style="color:var(--green-fg);font-weight:700">Correct</td></tr>
+            <tr><td><code>X-Robots-Tag</code> header</td><td class="num">index, follow, max-image-preview:large</td><td class="num">index, follow</td><td class="num" style="color:var(--green-fg);font-weight:700">Correct</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-label" style="margin-top:24px">Why this matters — and what it does not mean</div>
+      <div class="evidence-grid">
+        <div class="evidence-card">
+          <div class="evidence-label">The pages themselves are fine</div>
+          <div class="evidence-body">All 428 live URLs return <strong>200 on the production host</strong>, are <code>index,follow</code>, and where canonicals exist they correctly self-reference <code>travelbusinessclass.com</code>. Google can still discover pages through internal links and the strong paid/direct traffic footprint — which is probably why the site ranks at all. The sitemap is simply contributing nothing.</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-label">We cannot see the damage directly</div>
+          <div class="evidence-body">Without Google Search Console we can't read Index Coverage, the Sitemaps report, or whether Google has flagged <code>v2.</code> as an alternate. What we <em>can</em> say: 84 pages have no canonical at all, and for all 429 the sitemap asserts a different host than the one the pages are served from, so Google is left to pick the canonical host on its own. Connecting GSC is the first thing to do after the fix.</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-label">One-line fix, large blast radius</div>
+          <div class="evidence-body">Because robots, sitemap and the SSR payload all derive from the same Nuxt site-config value, correcting the production <code>NUXT_PUBLIC_SITE_URL</code> (or equivalent) fixes all three at once. The redeploy is low risk; the follow-up is deciding whether <code>v2.</code> should redirect, be blocked, or go dark.</div>
+        </div>
+      </div>
+
+      <div class="callout orange" style="margin-top:20px">
+        <span class="ico" aria-hidden="true"></span>
+        <div><strong>Related but separate: the site is leaning on paid acquisition.</strong> Similarweb's channel split shows Paid Search as the #1 source of desktop visits (36.3%), Display second and Direct third — organic search is not in the top three. Similarweb also describes the audience's interests as "AI chatbots and tools, social network, Google apps, productivity, shortcuts" rather than travel — consistent with broad display buying. We are not claiming the sitemap issue caused the channel mix; we are noting that the organic channel has been left without its most basic signals while the paid channel carries the business.</div>
+      </div>
+      <div class="callout blue" style="margin-bottom:0">
+        <span class="ico" aria-hidden="true"></span>
+        <div>This is a configuration problem, not a content problem — nothing here needs new pages or new links. Fix the site URL, redeploy, confirm <code>robots.txt</code> and the first 10 sitemap entries now read <code>travelbusinessclass.com</code>, then resubmit in Search Console. Expect Google to re-crawl the sitemap within days; expect coverage data, not rankings, to move first.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: TECHNICAL ===== -->
+<div class="page" id="page-technical">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Technical Infrastructure</div>
+    <h1>Technical issues</h1>
+    <p>Security posture is better than most travel sites (HSTS with <code>includeSubDomains</code>, CSP, COOP, CORP, Permissions-Policy, <code>nosniff</code>); redirects are clean; content is server-rendered so nothing depends on JavaScript to be indexed. The debt is in duplication and page weight — the Nuxt build ships ~331 KB of inline CSS and a 438 KB JS bundle on every page, and several blog posts embed their images as base64.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="issue">
+        <div class="issue-dot red"></div>
+        <div class="issue-body">
+          <div class="issue-title">159 "first class" destination pages are near-duplicates of the "business class" pages</div>
+          <div class="issue-desc">Every <code>/best-deals/{city|country|region}/*</code> page has a twin at <code>/first-class/{city|country|region}/*</code>. Comparing <code>/first-class/city/london</code> with <code>/best-deals/city/london</code>: <em>31 of 34 body sentences are identical</em> — only the words "first class" and the H1 change. Both carry self-canonicals, so Google sees 159 pairs of competing URLs. Either give the first-class set distinct content and fares, or canonicalize each to its business-class twin. Note <code>/first-class/region/oceania</code> is in the sitemap and live, but <code>/special-offers</code> 404s.</div>
+        </div>
+        <span class="issue-badge red">High</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">84 pages have no canonical tag</div>
+          <div class="issue-desc">The homepage, all 67 <code>/blog/post/*</code> articles, <code>/blog</code> and its 2 category pages, <code>/about</code>, <code>/contact-us</code>, <code>/corp-clients</code>, the 3 <code>/page/*</code> legal pages and 7 deal landing pages (<code>/best-deal</code>, <code>/best-deals</code>, <code>/discounted-business-class-deals</code>, <code>/first-class-flights</code>, <code>/insider-deals</code>, <code>/top-airlines-promo</code>, <code>/business-class/airlines</code>). Combined with the sitemap's conflicting host, these are the pages most exposed to Google choosing a canonical you didn't intend. Airline and destination templates already emit canonicals correctly — the fix is extending the same head logic to the remaining layouts.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">Four blog posts weigh 2–10 MB because images are embedded as base64</div>
+          <div class="issue-desc"><code>/blog/post/the-most-popular-open-countries-for-travel</code> is <em>10.2 MB of HTML</em> — 31 <code>data:image/…;base64</code> URIs totalling 10.3 MB. <code>…excellent-news-for-world-travellers-in-2022</code> is 5.3 MB, <code>…top-10-best-airport-lounges</code> 4.4 MB, <code>…travel-smart-in-the-covid-19-pandemic</code> 2.2 MB. These bypass the CDN and lazy-loading entirely and will fail Core Web Vitals on mobile. Move the images to <code>cdn.travelbusinessclass.com</code> and reference them normally.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">~470 KB average HTML per page, of which ~331 KB is inline CSS</div>
+          <div class="issue-desc">Nuxt is inlining the full stylesheet into every response instead of linking a cached CSS file. The main JS bundle (<code>_nuxt/82aht_fS.js</code>) is a further 438 KB uncompressed (correctly cached for 1 year). None of the 5,700 <code>&lt;img&gt;</code> tags found across the crawl serve WebP or AVIF. Not an indexation blocker, but it makes every page heavier than it needs to be and caps Core Web Vitals headroom.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot blue"></div>
+        <div class="issue-body">
+          <div class="issue-title">Duplicate legal and landing URLs</div>
+          <div class="issue-desc"><code>/page/terms_and_conditions</code> and <code>/page/terms_and_conditions_2025</code> share a title and both lack canonicals; <code>/best-deal</code> and <code>/best-deals</code> both exist; <code>/best-deals/city/singapore</code> and <code>/best-deals/country/singapore</code> share a title (same for the first-class pair). Minor on its own — but each pair is another place Google has to guess.</div>
+        </div>
+        <span class="issue-badge blue">Low</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot blue"></div>
+        <div class="issue-body">
+          <div class="issue-title">3 cross-origin links missing <code>rel="noopener"</code>; <code>X-Frame-Options</code> absent</div>
+          <div class="issue-desc">Three <code>target="_blank"</code> links on the homepage lack the safety attribute. <code>X-Frame-Options</code> is not set, though COOP is — add <code>frame-ancestors</code> to the existing CSP to close it. Routine hardening.</div>
+        </div>
+        <span class="issue-badge blue">Low</span>
+      </div>
+
+      <div class="callout blue" style="margin-top:20px;margin-bottom:0">
+        <span class="ico" aria-hidden="true"></span>
+        <div>The hosting and security base is genuinely good and nothing here blocks crawling. Do the first-class/best-deals decision and the 84 canonicals in the same sprint as the sitemap fix — together they define, for the first time, exactly which ~270 URLs you want Google to rank.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: ON-PAGE SEO ===== -->
+<div class="page" id="page-onpage">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">On-page SEO</div>
+    <h1>Titles, headings, and structured data</h1>
+    <p>All 428 live pages have a title and a meta description; none is <code>noindex</code>. The problems are consistency and age: titles are templated past 60 characters on 3 of 4 pages, 41 descriptions still promise deals "in 2022" or "2023", the homepage has no H1, and structured data exists on exactly one page.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">319 of 428 titles exceed 60 characters; 26 pages share a single title</div>
+          <div class="issue-desc">The destination and airline templates produce titles like <em>"Cheap Business Class Flights to All Nippon Airways (ANA) | Travel Business Class"</em> (80 chars) — and note the template reads "flights <em>to</em> [airline]", which is a grammatical artefact of reusing the destination pattern. 26 deal and first-class landing pages all carry <em>"Cheap Business Class Tickets | Travel Business Class | Business Class"</em>; <code>/corp-clients</code> duplicates the homepage title; <code>/business-class/airlines</code> is titled for Delta while its H1 says "Cheapest business class airlines". 52 titles use ✈ / ☎ symbols.<br><span style="color:var(--blue-fg)">Fix pattern: <em>"ANA Business Class Deals — Save up to 60% | TravelBusinessClass" (≤60 chars)</em></span></div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">41 meta descriptions reference 2022 or 2023; 186 pages share 38 descriptions; 59 exceed 160 characters</div>
+          <div class="issue-desc">29 blog posts carry the identical <em>"Visit travelbusinessclass.com blog to find cheap business class flights for your trip in 2023!"</em>; 45 first-class pages share one boilerplate description; <code>/best-deals/region/europe</code> advertises "airfare 2023"; <code>/first-class/region/europe</code> says "save up to 15-60% of travel costs in 2022". Stale years in snippets measurably hurt click-through for a deals business whose whole pitch is currency.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">Homepage and blog index have no H1; 13 pages have two or three</div>
+          <div class="issue-desc">The homepage renders 25 H2s ("Save with Travel Business Class!", "Methodology", "Passion for excellence!"…) and no H1. <code>/blog</code> and both category pages also lack one. Five airline pages (Delta, Emirates, Lufthansa, Turkish, United) and seven city pages (Athens, Düsseldorf, Frankfurt, Munich, Reykjavik, Zagreb, Zurich) have two H1s each; one blog post has three. Separately, the destination H1 is split across two <code>&lt;span&gt;</code>s with no whitespace between them, so the DOM text reads <em>"Business class flights toLondon"</em> on 26 pages — visually fine, semantically sloppy.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot orange"></div>
+        <div class="issue-body">
+          <div class="issue-title">Structured data on 1 of 428 pages</div>
+          <div class="issue-desc">The homepage has a well-formed <code>FAQPage</code> with 7 Q&amp;As — and that is the entire JSON-LD footprint. No <code>Organization</code> / <code>TravelAgency</code> (despite a real legal entity, address, phone and BBB accreditation), no <code>BreadcrumbList</code> on 322 destination pages, no <code>Article</code> on 67 blog posts, no <code>Offer</code> markup on the fare cards that are the site's core proposition. For a brand whose SERP is shared with "is it legit?" threads, entity markup is also a trust signal.</div>
+        </div>
+        <span class="issue-badge orange">Medium</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot blue"></div>
+        <div class="issue-body">
+          <div class="issue-title">579 images without <code>alt</code> across 77 pages</div>
+          <div class="issue-desc">Mostly fare-card and airline-logo images in the destination templates (12 on the homepage alone). Routine template fix; also an accessibility item.</div>
+        </div>
+        <span class="issue-badge blue">Low</span>
+      </div>
+      <div class="issue">
+        <div class="issue-dot blue"></div>
+        <div class="issue-body">
+          <div class="issue-title">What's already right</div>
+          <div class="issue-desc">Complete Open Graph and Twitter Card tags sitewide, correct <code>og:url</code> on the apex, <code>index,follow</code> everywhere, an owner-authored <code>llms.txt</code> that names the legal entity and canonical domain, a clean <code>robots.txt</code> policy (apart from the host), and server-rendered content throughout. No action needed — noted as a positive baseline.</div>
+        </div>
+        <span class="issue-badge blue">Low</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: COMPETITORS ===== -->
+<div class="page" id="page-competitors">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Competitive Analysis</div>
+    <h1>Competitive position &amp; link building</h1>
+    <p>SkyLux Travel, Business Class Consolidator and Business Class Guru are the three US business-class consolidators that appear alongside travelbusinessclass.com in live searches for "cheap business class flights consolidator" and in Similarweb's own "similar sites" lists for the domain. All figures are Similarweb public estimates for September 2026.</p>
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:16px">
+    <table>
+      <thead>
+        <tr><th>Website</th><th>Role</th><th>Visits / mo</th><th>Global rank</th><th>US Air Travel rank</th><th>Top channel (desktop)</th><th>Reviews</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>skyluxtravel.com</td><td><span class="role">Direct — consolidator, phone-first</span></td><td class="num">607K</td><td class="num">#78,055</td><td class="num">#130</td><td class="num">Direct 28%</td><td class="num">4.8 · 29,239</td></tr>
+        <tr><td>businessclassconsolidator.com</td><td><span class="role">Direct — consolidator (WordPress)</span></td><td class="num">11.8K</td><td class="num">#1,935,685</td><td class="num">#1,414</td><td class="num">Organic 37%</td><td class="num">4.7 · 1,405</td></tr>
+        <tr><td>businessclassguru.com</td><td><span class="role">Direct — consolidator</span></td><td class="num">8.5K</td><td class="num">#2,542,423</td><td class="num">#1,640</td><td class="num">Organic 41%</td><td class="num">4.8 · 24,523*</td></tr>
+        <tr class="hl"><td>travelbusinessclass.com (you)</td><td>Audited domain</td><td class="num">183.4K</td><td class="num">#176,002</td><td class="num">#207</td><td class="num">Paid Search 36%</td><td class="num">4.9 · 5,230</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout orange">
+    <span class="ico" aria-hidden="true"></span>
+    <div><strong>Read the channel column, not just the visits column.</strong> travelbusinessclass.com has 15–20× the traffic of the two smaller consolidators, but theirs is majority-organic and yours is majority-paid — Similarweb puts Paid Search first, Display second, Direct third, with organic search outside the top three. Both smaller sites also lost 25–29% of traffic month-on-month, so their organic base is fragile too. SkyLux is the only competitor combining scale (607K) with an owned channel (Direct 28%, Mail third) and an engaged audience (6:02 average visit vs your 1:24). *Business Class Guru's review count is self-reported on its own site; the others are Trustpilot. No Domain Rating or referring-domain figures appear here because Ahrefs is not connected — the comparison is traffic-shape, not link-authority.</div>
+  </div>
+
+  <div class="callout blue" style="margin-bottom:0">
+    <span class="ico" aria-hidden="true"></span>
+    <div><strong>SkyLux is the realistic model, not the smaller consolidators.</strong> It shows what the category supports once a brand owns its audience: three times your visits, mostly without paying per click. Your assets to get there are already built — 67 blog posts, 22 airline pages, a 4.9 Trustpilot score from 5,230 reviews and an existing USA Today feature. What's missing is the plumbing (sitemap, canonicals, schema) that lets those assets rank, and an editorial link programme aimed at travel press and personal-finance communities (Bogleheads already discusses the brand) rather than at volume.</div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: FORECAST ===== -->
+<div class="page" id="page-forecast">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Growth Forecast</div>
+    <h1>An illustrative scenario — not a modeled forecast</h1>
+    <p>This is directional, not a keyword-by-keyword volume × CTR model, and it carries one explicit assumption: Similarweb's free tier does not disclose the organic share, so we treat the current organic baseline as <strong>roughly 30K visits/month</strong> — consistent with organic sitting below the three disclosed channels of a 183K/month site. Replace that number with the real one from Search Console on day one. The range below assumes the Phase 1–3 fixes ship and real content and link work follows.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="forecast-model">
+        <div class="forecast-top">
+          <div>
+            <div class="forecast-kicker">12-month scenario · organic visits only · illustrative</div>
+            <div class="forecast-title">From ~30K to roughly 60–90K organic visits per month</div>
+            <p class="forecast-sub">Base case if the sitemap/robots host is fixed in month 1, the 159 duplicate first-class pages and 84 missing canonicals are resolved by month 2, templates are cleaned up by month 3, and the blog and airline pages then get sustained content and editorial-link investment. Fixing the plumbing alone, with no content programme, caps far lower — see the note below the chart.</p>
+          </div>
+          <div class="forecast-badge">Base case</div>
+        </div>
+
+        <div class="forecast-chart">
+          <svg viewBox="0 0 900 320" preserveAspectRatio="xMidYMid meet" aria-label="Illustrative forecast chart, linear scale, from roughly 30,000 to roughly 90,000 organic visits per month">
+            <g stroke="#DADCE0" stroke-width="1">
+              <line x1="70" y1="40" x2="860" y2="40"/>
+              <line x1="70" y1="116.7" x2="860" y2="116.7"/>
+              <line x1="70" y1="193.3" x2="860" y2="193.3"/>
+              <line x1="70" y1="270" x2="860" y2="270"/>
+            </g>
+            <g font-family="ui-monospace,monospace" font-size="11" fill="#9AA0A6">
+              <text x="60" y="44" text-anchor="end">90K</text>
+              <text x="60" y="121" text-anchor="end">60K</text>
+              <text x="60" y="197" text-anchor="end">30K</text>
+              <text x="60" y="274" text-anchor="end">0</text>
+            </g>
+            <!-- Base case: M0=30K(193.3) M3=36K(178) M6=48K(147.3) M9=62K(111.6) M12=75K(78.3) -->
+            <path d="M100 193.3 L280 178 L460 147.3 L640 111.6 L820 78.3" fill="none" stroke="#4285F4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Slower case: M0=30K(193.3) M3=32K(188.2) M6=37K(175.4) M9=41K(165.2) M12=45K(155) -->
+            <path d="M100 193.3 L280 188.2 L460 175.4 L640 165.2 L820 155" fill="none" stroke="#F6961B" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#4285F4"><circle cx="100" cy="193.3" r="4"/><circle cx="280" cy="178" r="4"/><circle cx="460" cy="147.3" r="4"/><circle cx="640" cy="111.6" r="4"/><circle cx="820" cy="78.3" r="4"/></g>
+            <g fill="#F6961B"><circle cx="280" cy="188.2" r="4"/><circle cx="460" cy="175.4" r="4"/><circle cx="640" cy="165.2" r="4"/><circle cx="820" cy="155" r="4"/></g>
+            <g font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display',system-ui,sans-serif">
+              <text x="796" y="58" text-anchor="end" font-size="24" font-weight="720" letter-spacing="-1" fill="#1559C4">~75K</text>
+              <text x="796" y="74" text-anchor="end" font-size="10" font-weight="650" letter-spacing=".08em" fill="oklch(46% .08 255)">ORGANIC VISITS / MONTH</text>
+            </g>
+            <g font-family="ui-monospace,monospace" font-size="12" fill="oklch(58% .012 260)" text-anchor="middle">
+              <text x="100" y="296">M0 (assumed ~30K)</text>
+              <text x="280" y="296">M3</text>
+              <text x="460" y="296">M6</text>
+              <text x="640" y="296">M9</text>
+              <text x="820" y="296">M12</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="forecast-footnote">
+          <span class="legend-item"><span class="legend-dot blue"></span>Base scenario — roadmap executed in full</span>
+          <span class="legend-item"><span class="legend-dot orange"></span>Slower case — partial or delayed execution</span>
+        </div>
+      </div>
+
+      <div class="callout orange" style="margin-top:16px">
+        <span class="ico" aria-hidden="true"></span>
+        <div>This range assumes real, ongoing work beyond this audit's punch list: (1) the sitemap/robots host is corrected and GSC is connected in month 1, (2) the first-class duplicates, missing canonicals and shared titles are resolved by month 2, (3) the 10 MB blog posts, inline CSS and schema gaps are fixed by month 3, and — the load-bearing assumption — (4) the blog and airline pages receive consistent new content and earned editorial links through the year, so the organic channel grows into the position Paid Search holds today. It does not assume any paid link-building, and the baseline itself must be replaced with Search Console data before any of this is treated as a target.</div>
+      </div>
+
+      <div class="callout red" style="margin-bottom:16px">
+        <span class="ico" aria-hidden="true"></span>
+        <div><strong>Without a content and link programme — plumbing fixes only:</strong> correcting the sitemap host, canonicals and templates will stop the bleeding and should recover whatever Google has been discounting, but on its own that is a one-time step, not a growth curve — plausibly the slower (dashed) line or below. The two organic-led competitors in this niche are both small (8–12K/month) and both shrinking, which says the category does not reward hygiene alone; it rewards owned audience and authority, which is what SkyLux has built.</div>
+      </div>
+
+      <div class="callout blue" style="margin-bottom:0">
+        <span class="ico" aria-hidden="true"></span>
+        <div>The upside is grounded in what the site already has, not an aspirational number: 183K monthly visits proves demand and brand recall exist; 5,230 Trustpilot reviews at 4.9 give it a trust asset most competitors lack; 67 published articles and 22 airline guides are an existing content base waiting on canonicals and schema. The business is not starting organic from zero — it has simply never pointed Google at itself.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: REPUTATION ===== -->
+<div class="page" id="page-reputation">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">Brand Reputation Analysis</div>
+    <h1>Brand reputation</h1>
+    <p>The brand has a genuinely strong review footprint on Trustpilot and a BBB A+ accreditation — and, sitting right next to them in a brand-name search, a cluster of "is it legit?" threads and a BBB consumer score of 2.6. None of this is a scanner artefact; these are real customer experiences on both sides, and the gap between them is itself the reputation issue.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="rep ok">
+        <div class="rep-icon ok" aria-hidden="true"></div>
+        <div><h4>Trustpilot: 4.9 / 5 from 5,230 reviews, 94% five-star</h4><p>A large, active, claimed profile; the company replies to 76% of negative reviews. Trustpilot's own AI summary praises agent helpfulness and deal-finding, and flags "occasional issues with post-purchase support" and customers "not being fully informed about certain booking procedures." This is the brand's strongest external trust asset and should be surfaced with <code>Organization</code> schema and on the pages that currently claim "97% of Travelers Recommend" without a source.</p></div>
+      </div>
+      <div class="rep ok">
+        <div class="rep-icon ok" aria-hidden="true"></div>
+        <div><h4>BBB Accredited Business, A+ rating, 7-year-old domain with real legal entities</h4><p>Travelbusinessclass.com, LLC (323 Sunny Isles Blvd, Sunny Isles Beach, FL) and Travel Management Group LLC (Wilmington, DE) are both listed. The domain has been registered since June 16, 2019 with registrar locks in place, and <code>llms.txt</code> names the legal entity and canonical domain. These are the facts that distinguish an established agency from the fly-by-night operators discussed in the same forums.</p></div>
+      </div>
+      <div class="rep risk">
+        <div class="rep-icon risk" aria-hidden="true">!</div>
+        <div><h4>BBB consumer reviews: 2.6 / 5 from 5 reviews; 11 complaints closed in the last 12 months</h4><p>The A+ is BBB's assessment of the business's responsiveness; the 2.6 is what customers wrote. Recent complaints (Feb–May 2026) concern a $4,041 ticket cancelled within 24 hours without notice, a Zipair fare sold as "business class" without disclosure of its à-la-carte model, a failed ticketing that left a family overseas without $14K of tickets, and refunds converted to travel credits after airline cancellations. The company answered every complaint, generally citing airline terms. The pattern — <strong>disclosure at point of sale and handling of disruptions</strong> — is operational, not SEO, but it is what a prospect finds on page one of a brand search.</p></div>
+      </div>
+      <div class="rep warn">
+        <div class="rep-icon warn" aria-hidden="true">i</div>
+        <div><h4>"Is it legit?" threads rank for the brand name</h4><p>Tripadvisor ("Anyone used travelbusinessclass.com?") carries a 2019-era allegation of a cancelled return flight and a slow partial refund; Bogleheads ("travelbusinessclass.com [is it legit?]") concludes "not usually scams per se, but tread carefully… advertising of extremely low fares is a bit misleading." Reddit threads about similarly named competitors (business-class.com, travel-business.com, airbusinesstravel.com) are also returned for the brand query, so the niche's reputation bleeds onto yours. None of these is a verdict against the company — but the company is absent from all of them.</p></div>
+      </div>
+      <div class="rep warn">
+        <div class="rep-icon warn" aria-hidden="true">i</div>
+        <div><h4>Third-party complaint aggregation is now indexing the brand</h4><p>complaintcensus.com has published an automated analysis of 618 Trustpilot reviews (Oct 2025–Oct 2026) under the heading "TravelBusinessClass: most-reported complaints," listing "support unhelpful" (17), "misleading pricing" (9), "unreachable support" (9) and "overcharging" (8) as rising themes. It is a scraper, not a regulator — but it is another page competing for the brand SERP, and it will keep updating.</p></div>
+      </div>
+      <div class="rep ok">
+        <div class="rep-icon ok" aria-hidden="true"></div>
+        <div><h4>No automated "scam site" classifications found</h4><p>Searches for the domain against ScamAdviser and Gridinsoft returned no negative classification pages — a meaningful difference from young domains in this space. The brand's reputation risk is human-written reviews and forum threads, which respond to engagement and operational fixes, not to dispute forms.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: CROWDO CORE ===== -->
+<div class="page" id="page-core">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">The Next Step</div>
+    <h1>Continue with <span style="color:var(--orange-fg)">Crowdo Core</span></h1>
+    <p>This audit was designed to give you a real sample of how Crowdo works: a full technical and content review, and a first view of your website's current visibility potential. The next step is to build on those findings with the Crowdo Core package that best fits your site's stage, opportunities, and growth needs.</p>
+  </div>
+
+  <div class="core-recommend">
+    <div class="core-recommend-label">★ Recommended Next Step</div>
+    <div class="core-recommend-title">Turn the trial into a growth plan — continue with the [Crowdo Core package] recommended for your website.</div>
+    <p class="core-recommend-copy">At 183K visits a month on a 7-year-old domain with 5,230 reviews, travelbusinessclass.com is not a foundation-stage site — it is an established brand whose organic channel has been under-built while paid carried the load. The right starting point is a technical reset (sitemap host, canonicals, duplicates) followed immediately by authority-building on the content that already exists, with the goal of shifting the channel mix rather than simply adding volume.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <h2 style="font-size:19px">What happens after the audit</h2>
+    </div>
+    <div class="core-grid">
+      <div class="core-card">
+        <div class="core-card-icon" aria-hidden="true"></div>
+        <h4>Package Recommendation</h4>
+        <p>We choose the Crowdo Core package that best matches the current condition and potential of the website.</p>
+      </div>
+      <div class="core-card">
+        <div class="core-card-icon" aria-hidden="true"></div>
+        <h4>Structured Growth Plan</h4>
+        <p>The next stage turns the trial findings into a clearer roadmap for visibility, authority, and long-term growth.</p>
+      </div>
+      <div class="core-card">
+        <div class="core-card-icon" aria-hidden="true"></div>
+        <h4>Expanded SEO &amp; GEO Support</h4>
+        <p>You move from a small sample into broader support across the core visibility areas that matter most.</p>
+      </div>
+      <div class="core-card">
+        <div class="core-card-icon" aria-hidden="true"></div>
+        <h4>Stronger Authority Signals</h4>
+        <p>The next package allows us to build more trust, stronger placements, and a wider off-page presence.</p>
+      </div>
+      <div class="core-card">
+        <div class="core-card-icon" aria-hidden="true"></div>
+        <h4>Deeper Website Support</h4>
+        <p>We can go further into technical, structural, and content-related improvements that help the site grow more consistently.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="core-cta-bar">
+    <p>The trial shows where the opportunity starts. <strong>Crowdo Core is the next step</strong> for turning that opportunity into a consistent and scalable growth system.</p>
+    <button class="contact-primary core-cta-btn" type="button">
+      Continue with Crowdo Core
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<div class="page" id="page-contact">
+<div class="page-inner">
+  <div class="page-header">
+    <div class="eyebrow">SEO Audit</div>
+    <h1>Any questions about this audit?</h1>
+    <p>Happy to walk through any finding above in more detail — no obligation.</p>
+  </div>
+
+  <div class="contact-panel">
+    <div class="contact-main">
+      <div>
+        <div class="contact-kicker">travelbusinessclass.com</div>
+        <h2 class="contact-title">Let's talk through the findings.</h2>
+        <p class="contact-copy">Every number in this report traces back to a live crawl of your sitemap, a header or DNS check against the live site, a public Similarweb estimate, or a public review page — reach out if you'd like the underlying data for any section, including the full 429-row crawl export behind the Technical and On-Page findings.</p>
+        <div class="contact-actions">
+          <a class="contact-primary" href="mailto:igor@crowdo.net" aria-label="Email Igor Turcan">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3.5 5.5h13v9h-13z"/><path d="m4 6 6 5 6-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            igor@crowdo.net
+          </a>
+        </div>
+        <div class="contact-note">
+          <div class="contact-note-item"><div class="contact-note-label">Format</div><div class="contact-note-value">30 minutes with the team</div></div>
+          <div class="contact-note-item"><div class="contact-note-label">Focus</div><div class="contact-note-value">First-month priorities</div></div>
+          <div class="contact-note-item"><div class="contact-note-label">Outcome</div><div class="contact-note-value">A clear execution start</div></div>
+        </div>
+      </div>
+      <aside class="contact-card" aria-label="Contact person">
+        <div class="contact-person">
+          <img src="igor-turcan.png" alt="Igor Turcan" class="contact-avatar">
+          <div>
+            <div class="contact-name">Igor Turcan</div>
+            <div class="contact-role">CROWDO · SEO strategy</div>
+          </div>
+        </div>
+        <div class="contact-qr-wrap">
+          <div class="contact-qr"><img src="qr-whatsapp.png" alt="WhatsApp QR code"></div>
+          <div class="contact-qr-copy"><strong>WhatsApp</strong><span>Scan to message directly.</span></div>
+        </div>
+      </aside>
+    </div>
+    <div class="contact-footer">
+      <p>SEO Audit · October 28, 2026 · travelbusinessclass.com</p>
+      <span>CROWDO</span>
+    </div>
+  </div>
+</div>
+</div>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var navItems = document.querySelectorAll('.nav-item');
+  var pages = document.querySelectorAll('.page');
+
+  function navigate(route){
+    navItems.forEach(function(n){ n.classList.toggle('active', n.dataset.route === route); });
+    pages.forEach(function(p){ p.classList.toggle('active', p.id === 'page-' + route); });
+    try { localStorage.setItem('tbc-fsp:route', route); } catch(_){}
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  navItems.forEach(function(item){
+    item.addEventListener('click', function(){ navigate(item.dataset.route); });
+  });
+
+  var coreCta = document.querySelector('.core-cta-btn');
+  if (coreCta) { coreCta.addEventListener('click', function(){ navigate('contact'); }); }
+
+  var savedRoute = 'summary';
+  try { savedRoute = localStorage.getItem('tbc-fsp:route') || 'summary'; } catch(_){}
+  navigate(savedRoute);
+})();
+</script>
+</body>
+</html>
